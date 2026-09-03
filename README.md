@@ -77,9 +77,7 @@ Data preparation
 The dataset is divided into:
 
 70% training data
-
 15% validation data
-
 15% test data
 
 Stratified splitting is used to preserve approximately the same fraud proportion in all three sets.
@@ -91,13 +89,9 @@ Training process
 Each model is trained using:
 
 Adam optimizer
-
 Learning rate of 0.001
-
 Batch size of 1024
-
 Maximum of 25 epochs
-
 Early stopping patience of 5 epochs
 
 Validation AUPRC is checked after every epoch. The weights that achieve the highest validation AUPRC are kept. Training stops early if validation AUPRC does not improve for five consecutive epochs.
@@ -105,29 +99,19 @@ Validation AUPRC is checked after every epoch. The weights that achieve the high
 The validation set is also used to select the probability threshold that produces the best F1-score. That threshold is then applied once to the untouched test set.
 
 Evaluation metrics
-
 Precision
 
 Precision measures how many transactions predicted as fraud were actually fraudulent:
 
 Precision = True Positives / (True Positives + False Positives)
-
 High precision means the system produces fewer false fraud alerts.
-
 Recall
-
 Recall measures how many actual fraudulent transactions were detected:
-
 Recall = True Positives / (True Positives + False Negatives)
-
 High recall means fewer fraudulent transactions are missed.
-
 F1-score
-
 F1-score combines precision and recall into one value:
-
 F1 = 2 × (Precision × Recall) / (Precision + Recall)
-
 AUPRC
 
 AUPRC summarizes the precision–recall relationship across different probability thresholds. It is particularly suitable for fraud detection because the fraud class is extremely rare.
@@ -173,65 +157,31 @@ Results
 After training, add the values from neural_network_comparison.csv to this table:
 
 Model
-
 Threshold
-
 Precision
-
 Recall
-
 F1
-
 AUPRC
-
 SmallMLP
-
-—
-
-—
-
-—
-
-—
-
-—
-
 DeepMLP
 
-—
-
-—
-
-—
-
-—
-
-—
 
 The model with the highest test AUPRC provides the stronger overall ranking of fraudulent transactions. Precision, recall and F1 should also be considered because they describe performance at the selected classification threshold.
 
 Limitations
 
 The dataset covers only two days of transactions from 2013.
-
 The anonymized PCA features are difficult to interpret directly.
-
 Fraud patterns can change over time.
-
 Weighted loss can improve attention to fraud, but it does not guarantee that every fraud will be detected.
-
 Results from this educational experiment should not be treated as a production fraud-detection system.
 
 Future improvements
 
 Compare different decision thresholds.
-
 Add model explainability methods.
-
 Test the models on newer transaction data.
-
 Add probability calibration.
-
 Monitor changes in fraud patterns over time.
 
 Disclaimer
